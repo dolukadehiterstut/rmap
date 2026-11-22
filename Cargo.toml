@@ -1,0 +1,29 @@
+[package]
+name = "rmap"
+version = "0.2.0"
+edition = "2021"
+description = "Fast async TCP port scanner written in Rust"
+license = "MIT"
+readme = "README.md"
+keywords = ["port-scanner", "security", "networking", "nmap", "pentest"]
+categories = ["command-line-utilities", "network-programming"]
+repository = "https://github.com/dolukadehiterstut/rmap"
+
+[dependencies]
+tokio = { version = "1", features = ["full"] }
+clap = { version = "4", features = ["derive"] }
+futures = "0.3"
+ipnet = "2"
+rand = "0.8"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+[target.'cfg(unix)'.dependencies]
+rlimit = "0.10"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true
